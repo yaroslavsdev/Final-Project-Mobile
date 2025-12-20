@@ -25,9 +25,9 @@ class GoodsViewModel : ViewModel() {
             ?.map { good ->
                 GoodsItem(
                     name = good.name,
-                    rating = good.rating,
                     description = good.description,
-                    imageURL = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSibbxABu10t0qxQWHjH-QQFSWaCgd68RbztA&s"
+                    imageURL = good.url,
+                    rating = good.rating
                 )
             } ?: emptyList()
 
@@ -52,6 +52,7 @@ class GoodsViewModel : ViewModel() {
             Good(
                 name = name,
                 description = description,
+                url = url,
                 rating = 5
             )
         )

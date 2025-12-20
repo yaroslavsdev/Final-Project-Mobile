@@ -17,8 +17,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.lyceum_saturday10_2025.features.goods.presentation.components.GoodsCard
@@ -31,16 +32,19 @@ fun GoodsScreenContent(
     onAddClicked: (String, String, String) -> Unit,
     onGoodClicked: (GoodsItem) -> Unit,
 ) {
+    val focusManager = LocalFocusManager.current
+    val keyboardController = LocalSoftwareKeyboardController.current
+
     Column {
         Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 16.dp)
+                .padding(start = 16.dp, end = 16.dp)
         ) {
             var nameTextFieldValue by remember { mutableStateOf("") }
             OutlinedTextField(
                 value = nameTextFieldValue,
+                modifier = Modifier.fillMaxWidth(),
                 onValueChange = { newValue ->
                     nameTextFieldValue = newValue
                 },
@@ -54,6 +58,7 @@ fun GoodsScreenContent(
             var descriptionTextFieldValue by remember { mutableStateOf("") }
             OutlinedTextField(
                 value = descriptionTextFieldValue,
+                modifier = Modifier.fillMaxWidth(),
                 onValueChange = { newValue ->
                     descriptionTextFieldValue = newValue
                 },
@@ -67,6 +72,7 @@ fun GoodsScreenContent(
             var urlTextFieldValue by remember { mutableStateOf("") }
             OutlinedTextField(
                 value = urlTextFieldValue,
+                modifier = Modifier.fillMaxWidth(),
                 onValueChange = { newValue ->
                     urlTextFieldValue = newValue
                 },
@@ -77,13 +83,19 @@ fun GoodsScreenContent(
 
             Spacer(Modifier.height(16.dp))
 
-            Button(onClick = {
-                onAddClicked(nameTextFieldValue, descriptionTextFieldValue, urlTextFieldValue)
+            Button(
+                modifier = Modifier.fillMaxWidth(),
+                onClick = {
+                    onAddClicked(nameTextFieldValue, descriptionTextFieldValue, urlTextFieldValue)
 
-                nameTextFieldValue = ""
-                descriptionTextFieldValue = ""
-                urlTextFieldValue = ""
-            }) {
+                    nameTextFieldValue = ""
+                    descriptionTextFieldValue = ""
+                    urlTextFieldValue = ""
+
+                    focusManager.clearFocus()    // Снимает курсор
+                    keyboardController?.hide()   // Скрывает клавиатуру
+            }
+            ) {
                 Text("Добавить товар")
             }
         }

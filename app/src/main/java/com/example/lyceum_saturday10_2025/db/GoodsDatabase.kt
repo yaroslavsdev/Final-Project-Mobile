@@ -24,6 +24,7 @@ data class Good(
     val id: Int = 0,
     val name: String,
     val description: String,
+    val url: String,
     val rating: Int,
 )
 
