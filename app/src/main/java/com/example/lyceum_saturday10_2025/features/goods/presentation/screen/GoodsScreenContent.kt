@@ -1,8 +1,10 @@
 package com.example.lyceum_saturday10_2025.features.goods.presentation.screen
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -15,6 +17,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -25,40 +28,64 @@ import com.example.lyceum_saturday10_2025.features.goods.presentation.model.Good
 @Composable
 fun GoodsScreenContent(
     state: GoodsUiState,
-    onAddClicked: (String, String) -> Unit,
+    onAddClicked: (String, String, String) -> Unit,
     onGoodClicked: (GoodsItem) -> Unit,
 ) {
     Column {
-        var nameTextFieldValue by remember { mutableStateOf("") }
-        OutlinedTextField(
-            value = nameTextFieldValue,
-            onValueChange = { newValue ->
-                nameTextFieldValue = newValue
-            },
-            placeholder = {
-                Text("Введите название")
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp)
+        ) {
+            var nameTextFieldValue by remember { mutableStateOf("") }
+            OutlinedTextField(
+                value = nameTextFieldValue,
+                onValueChange = { newValue ->
+                    nameTextFieldValue = newValue
+                },
+                placeholder = {
+                    Text("Введите название")
+                }
+            )
+
+            Spacer(Modifier.height(16.dp))
+
+            var descriptionTextFieldValue by remember { mutableStateOf("") }
+            OutlinedTextField(
+                value = descriptionTextFieldValue,
+                onValueChange = { newValue ->
+                    descriptionTextFieldValue = newValue
+                },
+                placeholder = {
+                    Text("Введите описание")
+                }
+            )
+
+            Spacer(Modifier.height(16.dp))
+
+            var urlTextFieldValue by remember { mutableStateOf("") }
+            OutlinedTextField(
+                value = urlTextFieldValue,
+                onValueChange = { newValue ->
+                    urlTextFieldValue = newValue
+                },
+                placeholder = {
+                    Text("Введите URL картинки")
+                }
+            )
+
+            Spacer(Modifier.height(16.dp))
+
+            Button(onClick = {
+                onAddClicked(nameTextFieldValue, descriptionTextFieldValue, urlTextFieldValue)
+
+                nameTextFieldValue = ""
+                descriptionTextFieldValue = ""
+                urlTextFieldValue = ""
+            }) {
+                Text("Добавить товар")
             }
-        )
-
-        Spacer(Modifier.height(16.dp))
-
-        var descriptionTextFieldValue by remember { mutableStateOf("") }
-        OutlinedTextField(
-            value = descriptionTextFieldValue,
-            onValueChange = { newValue ->
-                descriptionTextFieldValue = newValue
-            },
-            placeholder = {
-                Text("Введите описание")
-            }
-        )
-
-        Spacer(Modifier.height(16.dp))
-
-        Button(onClick = {
-            onAddClicked(nameTextFieldValue, descriptionTextFieldValue)
-        }) {
-            Text("Добавить товар")
         }
 
         LazyColumn(
@@ -75,5 +102,5 @@ fun GoodsScreenContent(
 @Composable
 @Preview
 private fun GoodsScreenPreview() {
-    GoodsScreenContent(GoodsUiState(), { _, _ -> }, { _ -> })
+    GoodsScreenContent(GoodsUiState(), { _, _, _ -> }, { _ -> })
 }

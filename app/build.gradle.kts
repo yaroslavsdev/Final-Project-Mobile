@@ -57,6 +57,7 @@ dependencies {
     implementation(libs.glideCompose)
 
     implementation(libs.coreDestinations)
+    implementation(libs.androidx.compose.foundation.layout)
     ksp(libs.kspDestinations)
     implementation(libs.kotlinx.serialization.json)
 

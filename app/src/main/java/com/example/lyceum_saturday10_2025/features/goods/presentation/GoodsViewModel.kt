@@ -38,14 +38,14 @@ class GoodsViewModel : ViewModel() {
         }
     }
 
-    fun addGood(name: String, description: String) {
+    fun addGood(name: String, description: String, url: String) {
         val goodsList = state.value.items.toMutableList()
         goodsList.add(
             GoodsItem(
                 name = name,
-                rating = 5,
                 description = description,
-                imageURL = ""
+                imageURL = url,
+                rating = 5
             )
         )
         db?.goodsDao()?.insert(
