@@ -81,7 +81,7 @@ fun GoodsCard(
 
             // Название товара
             Text(
-                modifier = Modifier.padding(16.dp),
+                modifier = Modifier.padding(start = 16.dp),
                 text = goodsItem.name,
                 fontWeight = FontWeight.Bold
             )
@@ -89,7 +89,7 @@ fun GoodsCard(
             // Описание товара
             if (goodsItem.description.isNotEmpty()) {
                 Text(
-                    modifier = Modifier.padding(16.dp),
+                    modifier = Modifier.padding(start = 16.dp, top = 8.dp, bottom = 16.dp),
                     text = goodsItem.description,
                     fontWeight = FontWeight.Normal
                 )
@@ -109,7 +109,7 @@ private fun GoodsCardPreview() {
                 description = "test description",
                 imageURL = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwqIDe967_WBni0OOu5rTIXDKlb7qVCt9qTw&s"
             ),
-            onGoodClicked = { _ -> Unit }
+            onGoodClicked = { _ -> }
         )
     }
 }
