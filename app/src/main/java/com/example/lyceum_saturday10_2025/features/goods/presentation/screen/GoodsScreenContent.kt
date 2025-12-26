@@ -31,6 +31,7 @@ fun GoodsScreenContent(
     state: GoodsUiState,
     onAddClicked: (String, String, String) -> Unit,
     onGoodClicked: (GoodsItem) -> Unit,
+    onDeleteClicked: (GoodsItem) -> Unit,
 ) {
     val focusManager = LocalFocusManager.current
     val keyboardController = LocalSoftwareKeyboardController.current
@@ -105,7 +106,11 @@ fun GoodsScreenContent(
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             items(state.items) { item ->
-                GoodsCard(item, onGoodClicked)
+                GoodsCard(
+                    goodsItem = item,
+                    onGoodClicked = onGoodClicked,
+                    onDeleteClicked = onDeleteClicked,
+                )
             }
         }
     }
@@ -114,5 +119,10 @@ fun GoodsScreenContent(
 @Composable
 @Preview
 private fun GoodsScreenPreview() {
-    GoodsScreenContent(GoodsUiState(), { _, _, _ -> }, { _ -> })
+    GoodsScreenContent(
+        state = GoodsUiState(),
+        onAddClicked = { _, _, _ -> },
+        onGoodClicked = { _ -> },
+        onDeleteClicked = {}
+    )
 }

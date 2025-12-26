@@ -42,4 +42,7 @@ interface GoodDao {
 
     @Delete
     fun delete(good: Good)
+
+    @Query("DELETE FROM Good WHERE id = :id")
+    fun delete(id: Int)
 }
