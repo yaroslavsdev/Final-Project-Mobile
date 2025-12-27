@@ -40,7 +40,7 @@ fun GoodsScreenContent(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(start = 16.dp, end = 16.dp)
+                .padding(start = 10.dp, end = 10.dp)
         ) {
             var nameTextFieldValue by remember { mutableStateOf("") }
             OutlinedTextField(
@@ -102,7 +102,7 @@ fun GoodsScreenContent(
         }
 
         LazyColumn(
-            modifier = Modifier.padding(8.dp),
+            modifier = Modifier.padding(start = 10.dp, top = 8.dp, end = 10.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             items(state.items) { item ->
