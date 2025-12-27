@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.layout.requiredWidth
@@ -32,7 +33,9 @@ fun GoodsDetails(goodsCurrent: GoodsItem) {
         contentAlignment = Alignment.Center
     ) {
         Card (
-            modifier = Modifier.padding(16.dp)
+            modifier = Modifier
+                .padding(start = 10.dp, end = 10.dp)   // Outer padding
+                .heightIn(50.dp, 600.dp)
         ) {
             Column(
                 modifier = Modifier.padding(16.dp)
