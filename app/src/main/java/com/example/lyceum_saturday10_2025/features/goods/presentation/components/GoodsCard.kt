@@ -35,6 +35,7 @@ import com.example.lyceum_saturday10_2025.ui.theme.Lyceum_saturday10_2025Theme
 fun GoodsCard(
     goodsItem: GoodsItem,
     onGoodClicked: (GoodsItem) -> Unit,
+    onDeleteClicked: (GoodsItem) -> Unit,
 ) {
     Card(
         onClick = {
@@ -69,7 +70,7 @@ fun GoodsCard(
 
                 // Кнопка удаления товара
                 IconButton(
-                    onClick = { /* обработка удаления */ }
+                    onClick = { onDeleteClicked(goodsItem) }
                 ) {
                     Icon(
                         painter = painterResource(R.drawable.ic_delete),
@@ -109,8 +110,8 @@ private fun GoodsCardPreview() {
                 description = "test description",
                 imageURL = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwqIDe967_WBni0OOu5rTIXDKlb7qVCt9qTw&s"
             ),
-            onGoodClicked = { _ -> }
+            onGoodClicked = { _ -> },
+            onDeleteClicked = {}
         )
     }
 }
-

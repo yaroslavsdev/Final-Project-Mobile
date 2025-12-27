@@ -19,19 +19,20 @@ class GoodsViewModel : ViewModel() {
         get() = _state
 
     init {
-        val goodsFromDb = db
-            ?.goodsDao()
-            ?.getAllGoods()
-            ?.map { good ->
-                GoodsItem(
-                    name = good.name,
-                    description = good.description,
-                    imageURL = good.url,
-                    rating = good.rating
-                )
-            } ?: emptyList()
-
         viewModelScope.launch {
+            val goodsFromDb = db
+                ?.goodsDao()
+                ?.getAllGoods()
+                ?.map { good ->
+                    GoodsItem(
+                        id = good.id,
+                        name = good.name,
+                        description = good.description,
+                        imageURL = good.url,
+                        rating = good.rating
+                    )
+                } ?: emptyList()
+
             _state.value = GoodsUiState(
                 mockList + goodsFromDb
             )
@@ -59,6 +60,12 @@ class GoodsViewModel : ViewModel() {
         _state.value = GoodsUiState(goodsList)
     }
 
+    fun deleteGood(goodsItem: GoodsItem) {
+        val goodsList = state.value.items.toMutableList()
+        goodsList.remove(goodsItem)
+        db?.goodsDao()?.delete(goodsItem.id)
+        _state.value = GoodsUiState(goodsList)
+    }
 
     companion object {
 

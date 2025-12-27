@@ -25,6 +25,7 @@ fun GoodsScreen(
         },
         onGoodClicked = { goodsItem ->
             navigator.navigate(GoodsDetailsDestination(goodsItem))
-        }
+        },
+        onDeleteClicked = viewmodel::deleteGood
     )
 }
